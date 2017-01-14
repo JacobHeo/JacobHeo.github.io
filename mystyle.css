@@ -1,3 +1,10 @@
 #content{
   color:green;
 }
+body{
+  background-color:purple;
+}
+
+.container{
+  margin:50px
+}
