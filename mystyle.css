@@ -2,9 +2,9 @@
   color:green;
 }
 body{
-  background-color:purple;
+  background-color:orange;
 }
 
-.container{
+.container{background-color:purple;
   margin:50px
 }
