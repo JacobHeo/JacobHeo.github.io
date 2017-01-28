@@ -10,6 +10,7 @@ function getNumbers(){
   document.getElementById("operand1").innerHTML=operand1;
   document.getElementById("operand2").innerHTML=operand2;
   document.getElementById("results").innerHTML="";
+  document.getElementById("userAnswer").value="";
 }
 
 function checkAnswer(){
