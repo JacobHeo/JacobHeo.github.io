@@ -3,8 +3,17 @@
 }
 body{
   background-color:orange;
+    
+  text-align:center;
+
 }
 
-.container{background-color:purple;
-  margin:50px
+.container{
+  background-color:purple;
+  margin:50px;
+  border-radius:50px;
+}
+    
+img {
+  height:200px;
 }
