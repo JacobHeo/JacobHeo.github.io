@@ -12,3 +12,15 @@ function getNumbers(){
   document.getElementById("operand2").innerHTML=operand2;
   document.getElementById("results").innerHTML="";
 }
+
+function checkAnswer(){
+  var userSum = document.getElementById("userAnswer").value;
+  var sum = operand1 + operand2;
+  
+  if(userSum == sum){
+    document.getElementById("results").innerHTML="Correct!";
+  }
+  else{
+    document.getElementById("results").innerHTML="Incorrect!";
+  }
+}
