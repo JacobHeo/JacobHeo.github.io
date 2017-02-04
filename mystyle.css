@@ -27,7 +27,7 @@ img {
 }
 
 #gallery input[type=button]{
-  background-color:orange;
+  background-color:red;
   color:blue;
   font-size:bolder;
   padding:15px;
