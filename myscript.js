@@ -32,7 +32,7 @@ var pics = [
            "https://signup.leagueoflegends.com/theme/signup_theme/img/signup_logo2_clean.png"
            ];
 
-var pickIndex = 0;
+var picIndex = 0;
 
 function goLeft(){
   
