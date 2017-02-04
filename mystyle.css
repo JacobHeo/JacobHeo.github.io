@@ -23,9 +23,13 @@ img {
 }
 
 #gallery img{
-  
+  height:100px;
 }
 
-#gallery img{
-  
+#gallery input[type=button]{
+  background-color:orange;
+  color:blue;
+  font-size:bolder;
+  padding:15px;
+  margin:4px;
 }
