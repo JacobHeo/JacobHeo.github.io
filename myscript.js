@@ -29,7 +29,8 @@ function checkAnswer(){
 var pics = [
            "http://www.flags.net/images/largeflags/SKOR0001.GIF",
            "https://sc-news.s3.amazonaws.com/18988/KGS+violin2.jpg",
-           "https://signup.leagueoflegends.com/theme/signup_theme/img/signup_logo2_clean.png"
+           "https://signup.leagueoflegends.com/theme/signup_theme/img/signup_logo2_clean.png",
+           "http://www.showchoir.com/choirs/media/school_images/s6.jpg?1485744351"
            ];
 
 var picIndex = 0;
