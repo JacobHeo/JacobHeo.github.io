@@ -1,6 +1,39 @@
 /*
 How to comment in css. forward slash star and close it with star forward slash
 */
+.box{
+  border-style:solid;
+  width:100px;
+  height:100px;
+  float:left;
+  text-align:center;
+  background-color:white;
+  vertical-align:middle;
+  line-height:100px;
+}
+
+#players{
+  float:left;
+}
+
+#board{
+  float:right;
+  width:350px;
+  height:350px;
+}
+
+#game{
+  border-style:solid;
+  width:600px;
+  height:400px;
+  padding:50px;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:25px;
+  background-color:blue;
+  margin-bottom:25px;
+  
+}
 
 #content{
   color:green;
