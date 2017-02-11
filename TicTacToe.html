@@ -11,14 +11,10 @@
            <a href="aboutme.html"> About Me </a> |
            <a href="projects.html"> Projects </a> |
          </p>
-         <div id="navigation">
-           <a href="FlashCardApp.html"> Flash Card App</a>
-           <a href="gallery.html"> Image gallery</a>
-           <a href="TicTacToe.html">Tic Tac Toe</a>
        <div id="game">
          <div id="players">
            <input type="button" value="X" onclick="chooseX()" />
-           <input type="button" value="0" onclick="choose0()" />
+           <input type="button" value="O" onclick="chooseO()" />
            <div id="notes">
              Press 'X' or 'O' above to play!
            </div>
@@ -26,8 +22,8 @@
          <div id="board">
            <div>
             <div class="box" id="row1col1" onclick="makeMove('row1col1')"></div> 
-            <div class="box" id="row2col2" onclick="makeMove('row2col2')"></div>
-            <div class="box" id="row3col3" onclick="makeMove('row3col3')"></div>
+            <div class="box" id="row1col2" onclick="makeMove('row1col2')"></div>
+            <div class="box" id="row1col3" onclick="makeMove('row1col3')"></div>
          </div>
            <div>
             <div class="box" id="row2col1" onclick="makeMove('row2col1')"></div> 
