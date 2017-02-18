@@ -1,3 +1,4 @@
+//JS for Tic Tac Toe
 var character = "";
 
 function chooseX(){
@@ -52,10 +53,7 @@ function checkWinner(){
   }
     
   }
-
-function changeColor (){
-  document.getElementById("content").style.color = "green";
-}
+//JS for Flash Card App
 var operand1;
 var operand2;
 
@@ -104,4 +102,15 @@ function goRight(){
     picIndex = picIndex + 1;
     document.getElementById("pic").src=pics[picIndex];
   }
+}
+
+//JS for Connect 4
+var character = ""
+
+function chooseBlack(){
+  color = 'Black'
+}
+
+function chooseRed(){
+  color = 'Red'
 }
