@@ -114,3 +114,7 @@ function chooseBlack(){
 function chooseRed(){
   color = 'Red'
 }
+
+function makeMove(divLocation){
+  
+}
