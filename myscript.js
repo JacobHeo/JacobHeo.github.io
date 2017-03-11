@@ -23,7 +23,7 @@ function makeMove(divLocation){
   }
   
   if(checkWinner()){
-    document.getElementById("notes").innerHTML=character + "wins!";
+    document.getElementById("notes").innerHTML=character + " wins!";
   } 
 }
 
@@ -102,19 +102,4 @@ function goRight(){
     picIndex = picIndex + 1;
     document.getElementById("pic").src=pics[picIndex];
   }
-}
-
-//JS for Connect 4
-var character = ""
-
-function chooseBlack(){
-  color = 'Black'
-}
-
-function chooseRed(){
-  color = 'Red'
-}
-
-function makeMove(divLocation){
-  
 }
