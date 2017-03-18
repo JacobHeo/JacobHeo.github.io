@@ -1,16 +1,18 @@
+//The functions below help fill the circles
 // this holds either black or red
 var chosenColor;
 
 function chooseColor(color){
   chosenColor = color;
 }
-
+//***MAIN METHOD FOR MOVING***
 //handles the general logic of making a move
 function makeMove(divID, col, row){
 
+  var winner = checkWinner(divID, col, row);
   
-
-    var rowIndex = 6;
+  if (winner === false){
+  var rowIndex = 6;
     //variable to hold circle location
     var circle = "row" + rowIndex + col;
     
@@ -20,6 +22,11 @@ function makeMove(divID, col, row){
     if(tryFilling(circle) === false){
       rowIndex = rowIndex - 1;
     }
+  }
+  else{
+    //alert("There is a winner");
+  }
+  
 }
 
 function checkRow(circle, rowIndex, col){
@@ -83,7 +90,36 @@ function fill(divLocation){
   document.getElementById(divLocation).style.backgroundColor=chosenColor
 }
 
- function checkWinner(){
+//the functions below help with determining a winner
+
+function checkWinner(divLocation, col){
+  
+ 
+  
+  var color = getBgColor("row" + 6 + col);
+  var colNum = col.substring(2,3);
+  
+      if(getBgColor("row" + 6 + col) == getBgColor("row" + 5 + col) &&
+         getBgColor("row" + 6 + col) == getBgColor("row" + 4 + col) &&
+         getBgColor("row" + 6 + col) == getBgColor("row" + 3 + col) &&
+         color !== "white"){
+        
+         alert("There is a Winner");
+      
+  
+         
+         return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function getBgColor(divLocation){
+  
+  return document.getElementById(divLocation).style.backgroundColor;
+}
+ function check(){
   var r1c1 = document.getElementById("row1col1").innerHTML;
   var r1c2 = document.getElementById("row1col2").innerHTML;
   var r1c3 = document.getElementById("row1col3").innerHTML;

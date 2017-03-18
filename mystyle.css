@@ -67,6 +67,10 @@ body{
 
 }
 
+#bulletpoints{
+  text-align:left;
+}
+
 #container{
   background-color:orange;
   margin:50px;
