@@ -26,8 +26,11 @@ function makeMove(divID, col, row){
   else{
     //alert("There is a winner");
   }
-  
+  if(checkWinner(divID, col, row)){
+   alert("Winner!");
 }
+}
+
 
 function checkRow(circle, rowIndex, col){
   
@@ -93,21 +96,68 @@ function fill(divLocation){
 //the functions below help with determining a winner
 
 function checkWinner(divLocation, col){
+
+  var columnUpWinner = false;
   
- 
+  for(var i = 6; i > 3; i--){
+    if(!columnUpWinner){
+    columnUpWinner = checkColumnUp(divLocation, col, i);
+  }
+    else{
+      break;
+    }
+  }
+      return columnUpWinner;
+}
+
+function checkColumnUp(divLocation, col, row){
   
-  var color = getBgColor("row" + 6 + col);
+    var color = getBgColor("row" + row + col);
+  
   var colNum = col.substring(2,3);
   
-      if(getBgColor("row" + 6 + col) == getBgColor("row" + 5 + col) &&
-         getBgColor("row" + 6 + col) == getBgColor("row" + 4 + col) &&
-         getBgColor("row" + 6 + col) == getBgColor("row" + 3 + col) &&
+      if(getBgColor("row" + row + col) == getBgColor("row" + (row - 1) + col) &&
+         getBgColor("row" + row + col) == getBgColor("row" + (row - 2) + col) &&
+         getBgColor("row" + row + col) == getBgColor("row" + (row - 3) + col) &&
          color !== "white"){
         
-         alert("There is a Winner");
-      
+         //alert("Winner");
+
+         return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function checkWinner(divLocation, col){
+
+  var columnDownWinner = false;
   
-         
+  for(var i = 3; i < 4; i--){
+    if(!columnDownWinner){
+    columnDownWinner = checkColumnDown(divLocation, col, i);
+  }
+    else{
+      break;
+    }
+  }
+      return columnDownWinner;
+}
+
+function checkColumnDown(divLocation, col, row){
+  
+    var color = getBgColor("row" + row + col);
+  
+  //var colNum = col.substring(2,3);
+  
+      if(getBgColor("row" + row + col) == getBgColor("row" + (row + 1) + col) &&
+         getBgColor("row" + row + col) == getBgColor("row" + (row + 2) + col) &&
+         getBgColor("row" + row + col) == getBgColor("row" + (row + 3) + col) &&
+         color !== "white"){
+        
+         //alert("Winner");
+
          return true;
   }
   else{
