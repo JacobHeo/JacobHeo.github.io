@@ -130,26 +130,11 @@ function checkColumnUp(divLocation, col, row){
   }
 }
 
-function checkWinner(divLocation, col){
-
-  var columnDownWinner = false;
-  
-  for(var i = 3; i < 4; i--){
-    if(!columnDownWinner){
-    columnDownWinner = checkColumnDown(divLocation, col, i);
-  }
-    else{
-      break;
-    }
-  }
-      return columnDownWinner;
-}
-
 function checkColumnDown(divLocation, col, row){
   
     var color = getBgColor("row" + row + col);
   
-  //var colNum = col.substring(2,3);
+  var colNum = col.substring(2,3);
   
       if(getBgColor("row" + row + col) == getBgColor("row" + (row + 1) + col) &&
          getBgColor("row" + row + col) == getBgColor("row" + (row + 2) + col) &&
