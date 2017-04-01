@@ -130,15 +130,30 @@ function checkColumnUp(divLocation, col, row){
   }
 }
 
-function checkColumnDown(divLocation, col, row){
+function checkWinners(divLocation, row){
+  
+  var rowWinner = false;
+  
+  for(var i = 7; i > 3; i--){
+    if(!rowWinner){
+      rowWinner = checkRowAcross(divLocation, row, i);
+    }
+      else{
+        break;
+      }
+    }
+  return rowWinner
+}
+    function checkRowAcross(divLocation, col, row){
   
     var color = getBgColor("row" + row + col);
   
   var colNum = col.substring(2,3);
   
-      if(getBgColor("row" + row + col) == getBgColor("row" + (row + 1) + col) &&
-         getBgColor("row" + row + col) == getBgColor("row" + (row + 2) + col) &&
-         getBgColor("row" + row + col) == getBgColor("row" + (row + 3) + col) &&
+      if(getBgColor("row" + row + col) == getBgColor("row" + row + (col - 1)) &&
+         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 2)) &&
+         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 3)) &&
+         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 4)) &&
          color !== "white"){
         
          //alert("Winner");
