@@ -117,7 +117,7 @@ function checkWinner(divLocation, col, row){
 	
 	
 	
-	return (columnUpWinner || acrossWinner);
+	return (columnUpWinner || acrossWinner || checkAllDiagonals());
 }
 
 //checks for a winner vertically
@@ -162,8 +162,40 @@ function checkRowAcross(col){
 	   }
 }
 
-function checkDiagonal(){
-  
+function checkDiagonal(row){
+	
+	var filled =true;
+	
+	//track rows, they get smaller
+  for(var i = row; i >= 1; i--){
+		//track columns, they get bigger
+		for(var j = 1; j <= 4; j++){
+			
+			if(!isFilled("row" + i + "col" + j)){
+					//alert("checking diagonal" + "row" + i + "col")
+					filled = false;
+				
+					if(row == 5){
+							break;
+					}
+				
+					if(row == 6 && (j == 1 || j== 2)){
+						 		break;
+						 }
+					return false;
+			}
+			else{
+				i = i - 1; //i--
+				//j = j + 1; //j++
+			}
+		}
+	}
+		return true;
+}
+
+function checkAllDiagonals(){
+	
+	return checkDiagonal(4) || checkDiagonal(5) || checkDiagonal(6);
 }
 
 //this function returns the color of a circle
