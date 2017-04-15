@@ -1,67 +1,60 @@
-//The functions below help fill the circles
 // this holds either black or red
 var chosenColor;
+var rowOfFallenChip = 6;
 
 function chooseColor(color){
   chosenColor = color;
 }
-//***MAIN METHOD FOR MOVING***
+
 //handles the general logic of making a move
 function makeMove(divID, col, row){
 
-  var winner = checkWinner(divID, col, row);
-  
-  if (winner === false){
-  var rowIndex = 6;
-    //variable to hold circle location
-    var circle = "row" + rowIndex + col;
-    
-    checkRow(circle, rowIndex, col);
+	var winner = checkWinner(divID, col, row);
 
-       //if the circle is already filled
-    if(tryFilling(circle) === false){
-      rowIndex = rowIndex - 1;
+	if(winner == false){
+		var rowIndex = 6;
+		//variable to hold circle location
+		var circle = "row" + rowIndex + col;
+		
+		rowOfFallenChip = checkRow(circle, rowIndex, col);
+		//alert("fallen chip row: " + rowOfFallenChip);
+	
+		   //if the circle is already filled
+		if(tryFilling(circle) === false){
+		  rowIndex = rowIndex - 1;
+		  //rowOfFallenChip = rowIndex;
+		  //alert("fallen chip row: " + rowOfFallenChip);
+		}
     }
-  }
-  else{
-    //alert("There is a winner");
-  }
-  if(checkWinner(divID, col, row)){
-   alert("Winner!");
-}
+    else{
+    	alert("Winner!");	
+    }
+    
+    if(checkWinner(divID, col, row)){
+    	alert("Winner!");		
+    }
 }
 
-
+//check if filled, to simulate falling chip
 function checkRow(circle, rowIndex, col){
   
   var stop = false;
   while(!stop){
- circle = "row" +rowIndex + col;
-  
-    //if the circle is already filled
-    if(tryFilling(circle) === false){
-    rowIndex = rowIndex - 1
-   }
-  else{
-    stop = true;
-  }
+	 circle = "row" +rowIndex + col;
+	  
+		//if the circle is already filled
+		if(tryFilling(circle) === false){
+		rowIndex = rowIndex - 1
+	   }
+	  else{
+		stop = true;
+	  }
   }
 
   return rowIndex;
 }
+
 //this tries filling in a circle if not filled
-  function tryFilling(divID){
-  //create variable to hold true of false if filled
-  var isDivFilled = isFilled(divID);
-  
-  if(isDivFilled === true){
-    return false;
-  }
-  
-    fill(divID);
-
-}
-
 function tryFilling(divID){
     //create variable to hold true of false if filled
   var isDivFilled = isFilled(divID);
@@ -71,8 +64,9 @@ function tryFilling(divID){
   else{
     fill(divID);
     return true;
+  }
 }
-}
+
   // support function that checks if a circle is filled
   function isFilled(divLocation){
     
@@ -95,136 +89,85 @@ function fill(divLocation){
 
 //the functions below help with determining a winner
 
-function checkWinner(divLocation, col){
-
-  var columnUpWinner = false;
-  
-  for(var i = 6; i > 3; i--){
-    if(!columnUpWinner){
-    columnUpWinner = checkColumnUp(divLocation, col, i);
-  }
-    else{
-      break;
-    }
-  }
-      return columnUpWinner;
+//checks for winner
+function checkWinner(divLocation, col, row){
+	
+	var columnUpWinner = false;
+	var acrossWinner = false;
+	
+	for(var i = 6; i > 3; i--){
+		
+		if(!columnUpWinner){
+			columnUpWinner = checkColumnUp(divLocation, col, i);
+		}
+		else{
+			break;
+		}
+	}
+	
+	for(var j = 7; j > 3; j--){
+		
+		if(!acrossWinner){
+			acrossWinner = checkRowAcross(j);
+		}
+		else{
+			break;
+		}
+	}
+	
+	
+	
+	return (columnUpWinner || acrossWinner);
 }
 
+//checks for a winner vertically
 function checkColumnUp(divLocation, col, row){
-  
-    var color = getBgColor("row" + row + col);
-  
-  var colNum = col.substring(2,3);
-  
-      if(getBgColor("row" + row + col) == getBgColor("row" + (row - 1) + col) &&
-         getBgColor("row" + row + col) == getBgColor("row" + (row - 2) + col) &&
-         getBgColor("row" + row + col) == getBgColor("row" + (row - 3) + col) &&
-         color !== "white"){
-        
-         //alert("Winner");
 
-         return true;
-  }
-  else{
-    return false;
-  }
+	var color = getBgColor("row" +  row + col);
+	
+	if(getBgColor("row" +  row + col) === getBgColor("row" + (row - 1) + col) && 
+	   getBgColor("row" +  row + col) === getBgColor("row" + (row - 2) + col) &&
+	   getBgColor("row" +  row + col) === getBgColor("row" + (row - 3) + col) &&
+	   color !== "white"){
+	   	
+	   		return true;
+	}
+	else{
+		return false;
+	}
+	
 }
 
-function checkWinners(divLocation, row){
+function checkRowAcross(col){
   
-  var rowWinner = false;
+	//alert("location " + row + "col" + col);
+	var row = "row" + rowOfFallenChip;
+	
+	//alert("row: " + row);
+	
+	//alert("location: " + row + "col" + col);
+	
+    var color = getBgColor(row + "col" + col);
   
-  for(var i = 7; i > 3; i--){
-    if(!rowWinner){
-      rowWinner = checkRowAcross(divLocation, row, i);
-    }
-      else{
-        break;
-      }
-    }
-  return rowWinner
-}
-    function checkRowAcross(divLocation, col, row){
   
-    var color = getBgColor("row" + row + col);
-  
-  var colNum = col.substring(2,3);
-  
-      if(getBgColor("row" + row + col) == getBgColor("row" + row + (col - 1)) &&
-         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 2)) &&
-         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 3)) &&
-         getBgColor("row" + row + col) == getBgColor("row" + row + (col - 4)) &&
-         color !== "white"){
-        
-         //alert("Winner");
-
-         return true;
-  }
-  else{
-    return false;
-  }
+	  if(getBgColor(row + "col" + col) == getBgColor(row + "col" + (col - 1)) &&
+		 getBgColor(row + "col" + col) == getBgColor(row + "col" + (col - 2)) &&
+		 getBgColor(row + "col" + col) == getBgColor(row + "col" + (col - 3)) &&
+		 color !== "white"){
+	
+		 return true;
+	  }
+	  else{
+		  return false;
+	   }
 }
 
+function checkDiagonal(){
+  
+}
+
+//this function returns the color of a circle
 function getBgColor(divLocation){
-  
-  return document.getElementById(divLocation).style.backgroundColor;
+	
+	return document.getElementById(divLocation).style.backgroundColor;
 }
- function check(){
-  var r1c1 = document.getElementById("row1col1").innerHTML;
-  var r1c2 = document.getElementById("row1col2").innerHTML;
-  var r1c3 = document.getElementById("row1col3").innerHTML;
-  var r1c4 = document.getElementById("row1col4").innerHTML;
-  var r1c5 = document.getElementById("row1col5").innerHTML;
-  var r1c6 = document.getElementById("row1col6").innerHTML;
-  var r1c7 = document.getElementById("row1col7").innerHTML;
-  var r2c1 = document.getElementById("row2col1").innerHTML;
-  var r2c2 = document.getElementById("row2col2").innerHTML;
-  var r2c3 = document.getElementById("row2col3").innerHTML;
-  var r2c4 = document.getElementById("row2col4").innerHTML;
-  var r2c5 = document.getElementById("row2col5").innerHTML;
-  var r2c6 = document.getElementById("row2col6").innerHTML;
-  var r2c7 = document.getElementById("row2col7").innerHTML;
-  var r3c1 = document.getElementById("row3col1").innerHTML;
-  var r3c2 = document.getElementById("row3col2").innerHTML;
-  var r3c3 = document.getElementById("row3col3").innerHTML;
-  var r3c4 = document.getElementById("row3col4").innerHTML;
-  var r3c5 = document.getElementById("row3col5").innerHTML;
-  var r3c6 = document.getElementById("row3col6").innerHTML;
-  var r3c7 = document.getElementById("row3col7").innerHTML;
-  var r4c1 = document.getElementById("row4col1").innerHTML;
-  var r4c2 = document.getElementById("row4col2").innerHTML;
-  var r4c3 = document.getElementById("row4col3").innerHTML;
-  var r4c4 = document.getElementById("row4col4").innerHTML;
-  var r4c5 = document.getElementById("row4col5").innerHTML;
-  var r4c6 = document.getElementById("row4col6").innerHTML;
-  var r4c7 = document.getElementById("row4col7").innerHTML;
-  var r5c1 = document.getElementById("row5col1").innerHTML;
-  var r5c2 = document.getElementById("row5col2").innerHTML;
-  var r5c3 = document.getElementById("row5col3").innerHTML;
-  var r5c4 = document.getElementById("row5col4").innerHTML;
-  var r5c5 = document.getElementById("row5col5").innerHTML;
-  var r5c6 = document.getElementById("row5col6").innerHTML;
-  var r5c7 = document.getElementById("row5col7").innerHTML;
-  var r6c1 = document.getElementById("row6col1").innerHTML;
-  var r6c2 = document.getElementById("row6col2").innerHTML;
-  var r6c3 = document.getElementById("row6col3").innerHTML;
-  var r6c4 = document.getElementById("row6col4").innerHTML;
-  var r6c5 = document.getElementById("row6col5").innerHTML;
-  var r6c6 = document.getElementById("row6col6").innerHTML;
-  var r6c7 = document.getElementById("row6col7").innerHTML;
-   
-
-if(r1c1 == r1c2 && r1c1 == r1c3 && r1c1 !== "" ||
-     r2c1 == r2c2 && r2c1 == r2c3 && r2c1 !== "" ||
-     r3c1 == r3c2 && r3c1 == r3c3 && r3c1 !== "" ||
-     r1c1 == r2c1 && r1c1 == r3c1 && r1c1 !== "" ||
-     r1c2 == r2c2 && r1c2 == r3c2 && r1c2 !== "" ||
-     r1c3 == r2c3 && r1c3 == r3c3 && r1c3 !== "" ||
-     r1c1 == r2c2 && r1c1 == r3c3 && r1c1 !== "" ||
-     r1c3 == r2c2 && r1c3 == r3c3 && r1c3 !== "" ){
-    return true;
-  }
-  else{
-    return false;
-  }
- }
